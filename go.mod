@@ -2,7 +2,10 @@ module ginkgo-google-test
 
 go 1.24.2
 
+require github.com/tebeka/selenium v0.9.9
+
 require (
+	github.com/blang/semver v3.5.1+incompatible // indirect
 	github.com/chromedp/cdproto v0.0.0-20250403032234-65de8f5d025b // indirect
 	github.com/chromedp/chromedp v0.13.6 // indirect
 	github.com/chromedp/sysutil v1.1.0 // indirect
