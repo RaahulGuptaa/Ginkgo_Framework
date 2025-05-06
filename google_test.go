@@ -26,7 +26,7 @@ var _ = Describe("Chrome", func() {
 	BeforeEach(func() {
 		// Browser launch options
 		opts := append(chromedp.DefaultExecAllocatorOptions[:],
-			chromedp.Flag("headless", false),
+			chromedp.Flag("headless", true),
 			chromedp.Flag("disable-gpu", true),
 			chromedp.Flag("no-sandbox", true),
 			chromedp.Flag("start-maximized", true),
