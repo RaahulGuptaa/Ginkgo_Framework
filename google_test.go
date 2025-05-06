@@ -35,18 +35,20 @@ var _ = Describe("Chrome", func() {
 		// Setup Chrome instance
 		allocCtx, cancel = chromedp.NewExecAllocator(context.Background(), opts...)
 		ctx, cancel = chromedp.NewContext(allocCtx)
+		ctx, cancel = context.WithTimeout(ctx, 20*time.Second)
 	})
 
 	AfterEach(func() {
+		// Ensure to cancel context after each test
 		cancel()
 	})
 
 	It("should search for 'Apple device' on Google", func() {
 		err := chromedp.Run(ctx,
 			chromedp.Navigate("https://www.google.com"),
-			chromedp.WaitVisible(`//textarea[@name="q"]`, chromedp.BySearch),
-			chromedp.SendKeys(`//textarea[@name="q"]`, "Apple device", chromedp.BySearch),
-			chromedp.Click(`//input[@name="btnK"]`, chromedp.BySearch),
+			chromedp.WaitVisible(`//textarea[@name="q"]`, chromedp.BySearch),              // BySearch due to Xpath for css use -> ByQuer
+			chromedp.SendKeys(`//textarea[@name="q"]`, "Apple device", chromedp.BySearch), // BySearch due to Xpath for css use -> ByQuer
+			chromedp.Click(`//input[@name="btnK"]`, chromedp.BySearch),                    // BySearch due to Xpath for css use -> ByQuer
 			chromedp.Sleep(10*time.Second),
 		)
 		Expect(err).To(BeNil())
